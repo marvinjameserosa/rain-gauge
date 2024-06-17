@@ -4,14 +4,12 @@ import threading
 PORT = None  
 BAUDRATE = 9600
 data_dict = {
-    'rpm': '0',
-    'flowrate':'0',
+    'rpm': '0.00 rpm',
+    'flowrate':'0.00 m3/s',
     'mm':'0.00',
-    'intensity':'',
-
-    'exception': '',
-    
-             }
+    'intensity':'No Rain',
+    'exception': '', 
+}
 
 def get_port():
     global PORT
