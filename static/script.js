@@ -13,17 +13,21 @@ function updateSensorValues() {
       });
 }
 
-function reset(){
-    var rpm = '0.00 rpm';
-    document.getElementById("rpm-val").textContent = rpm;
-    var flowrate = '0.00 m3/s';
-    document.getElementById("flowrate-val").textContent = flowrate;
-    var mm = '0.00';
-    document.getElementById("mm-val").textContent = mm;
-    var intensity = 'No Rain';
-    document.getElementById("intensity-val").textContent = intensity;
+function resetData() {
+    fetch('/reset_data', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            // Optionally update UI elements on successful reset
+            document.getElementById("rpm-val").textContent = '0.00 rpm';
+            document.getElementById("flowrate-val").textContent = '0.00 m3/s';
+            document.getElementById("mm-val").textContent = '0.00';
+            document.getElementById("intensity-val").textContent = 'No Rain';
+        })
+        .catch(error => {
+            console.error('Error resetting data:', error);
+            alert('Error resetting data');
+        });
 }
 
-
 setInterval(updateSensorValues, 100);
-document.getElementById("reset-btn").addEventListener("click", reset);
